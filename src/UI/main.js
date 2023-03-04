@@ -12,44 +12,45 @@ $(function() {
 
 	var sources = {
 
-		"Bing Maps": "http://ecn.t0.tiles.virtualearth.net/tiles/r{quad}.jpeg?g=129&mkt=en&stl=H",
-		"Bing Maps Satellite": "http://ecn.t0.tiles.virtualearth.net/tiles/a{quad}.jpeg?g=129&mkt=en&stl=H",
-		"Bing Maps Hybrid": "http://ecn.t0.tiles.virtualearth.net/tiles/h{quad}.jpeg?g=129&mkt=en&stl=H",
+		"Bing Maps": 			"http://ecn.t0.tiles.virtualearth.net/tiles/r{quad}.jpeg?g=129&mkt=en&stl=H",
+		"Bing Maps Satellite": 	"http://ecn.t0.tiles.virtualearth.net/tiles/a{quad}.jpeg?g=129&mkt=en&stl=H",
+		"Bing Maps Hybrid": 	"http://ecn.t0.tiles.virtualearth.net/tiles/h{quad}.jpeg?g=129&mkt=en&stl=H",
 
 		"div-1B": "",
 
-		"Google Maps": "https://mt0.google.com/vt?lyrs=m&x={x}&s=&y={y}&z={z}",
-		"Google Maps Satellite": "https://mt0.google.com/vt?lyrs=s&x={x}&s=&y={y}&z={z}",
-		"Google Maps Hybrid": "https://mt0.google.com/vt?lyrs=h&x={x}&s=&y={y}&z={z}",
-		"Google Maps Terrain": "https://mt0.google.com/vt?lyrs=p&x={x}&s=&y={y}&z={z}",
+		"Google Maps": 				"https://mt0.google.com/vt?lyrs=m&x={x}&s=&y={y}&z={z}",
+		"Google Maps Satellite": 	"https://mt0.google.com/vt?lyrs=s&x={x}&s=&y={y}&z={z}",
+		"Google Maps Hybrid": 		"https://mt0.google.com/vt?lyrs=h&x={x}&s=&y={y}&z={z}",
+		"Google Maps Terrain": 		"https://mt0.google.com/vt?lyrs=p&x={x}&s=&y={y}&z={z}",
 
 		"div-2": "",
 
-		"Open Street Maps": "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
-		"Open Cycle Maps": "http://a.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
-		"Open PT Transport": "http://openptmap.org/tiles/{z}/{x}/{y}.png",
+		"Open Street Maps": 	"https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+		"Open Cycle Maps": 		"http://a.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
+		"Open PT Transport": 	"http://openptmap.org/tiles/{z}/{x}/{y}.png",
 
 		"div-3": "",
 
-		"ESRI World Imagery": "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-		"Wikimedia Maps": "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",
-		"NASA GIBS": "https://map1.vis.earthdata.nasa.gov/wmts-webmerc/MODIS_Terra_CorrectedReflectance_TrueColor/default/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg",
+		"ESRI World Imagery": 	"http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+		"Wikimedia Maps": 		"https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",
+		"NASA GIBS": 			"https://satellites.pro/#{y},{x},{z}",
 
 		"div-4": "",
 
-		"Carto Light": "http://cartodb-basemaps-c.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+		"Carto Light": 		"http://cartodb-basemaps-c.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
 		"Stamen Toner B&W": "http://a.tile.stamen.com/toner/{z}/{x}/{y}.png",
 
 	};
+	var osmPattern = "osm_100-l-3-{z}-{x}-{y}.png";
 
 	function initializeMap() {
 
-		mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpYXNocmFmIiwiYSI6ImNqdXl5MHV5YTAzNXI0NG51OWFuMGp4enQifQ.zpd2gZFwBTRqiapp1yci9g';
+		mapboxgl.accessToken = 'pk.eyJ1Ijoibmlja3JyciIsImEiOiJjbGVpdTFqZnAwMDlpM3NvOGxkZ251aHJqIn0.AUJPN07-88DhT1idGqSNOg';
 
 		map = new mapboxgl.Map({
 			container: 'map-view',
-			style: 'mapbox://styles/aliashraf/ck6lw9nr80lvo1ipj8zovttdx',
-			center: [-73.983652, 40.755024], 
+			style: 'mapbox://styles/mapbox/streets-v12',
+			center: [30.557787940896944, 50.418033141121136], 
 			zoom: 12
 		});
 
@@ -98,6 +99,11 @@ $(function() {
 		})
 	}
 
+/*	osm_100-<l|h>-<map_id>-<z>-<x>-<y>.<extension>.
+*	The field map_id goes from 1 to 7 (or 8, if a custom map type is specified), referring to the map types 
+*	street, satellite, cycle, transit, night-transit, terrain and hiking, in this order.
+*	The field before has to contain an l or an h, which stands low-dpi and high-dpi tiles, respectively.
+*/
 	function initializeMoreOptions() {
 
 		$("#more-options-toggle").click(function() {
@@ -112,7 +118,7 @@ $(function() {
 			} else if(outputType == "repo") {
 				outputFileBox.val("tiles.repo")
 			} else if(outputType == "directory") {
-				outputFileBox.val("{z}/{x}/{y}.png")
+				outputFileBox.val(osmPattern);
 			}
 		})
 
@@ -407,6 +413,7 @@ $(function() {
 		$("#stop-button").click(stopDownloading)
 
 		var timestamp = Date.now().toString();
+		// var mapType = ;
 		//$("#output-directory-box").val(timestamp)
 	}
 

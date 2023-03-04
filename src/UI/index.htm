@@ -8,8 +8,8 @@
 	<!-- TODO replace jquery with react -->
 	<script src="jquery.min.js"></script> 
 
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
 
 	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
 	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
@@ -50,7 +50,7 @@
 
 		<form id='search-form' class='sidebar-section row'>
 			<div class="input-field col s12">
-				<input id="location-box" type="text" value="New York" />
+				<input id="location-box" type="text" value="Kyiv" />
 				<label for="location-box">Enter a location</label>
 			</div>
 		</form>
@@ -83,7 +83,7 @@
 					<label for="zoom-from-box" class="active">Zoom from:</label>
 				</div>
 				<div class="input-field col s6">
-					<input id="zoom-to-box" type="text" value='15'/>
+					<input id="zoom-to-box" type="text" value='17'/>
 					<label for="zoom-to-box" class="active">Zoom to:</label>
 				</div>
 			</div>
@@ -145,7 +145,7 @@
 			</div>
 
 			<div class="input-field col s12">
-				<input id="parallel-threads-box" type="text" value="4">
+				<input id="parallel-threads-box" type="text" value="8">
 				<label for="parallel-threads-box">Parallel downloads</label>
 			</div>
 		</div>
